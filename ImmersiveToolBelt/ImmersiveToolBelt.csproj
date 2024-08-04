@@ -40,11 +40,23 @@
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="Harmony\Interfaces.cs"/>
+        <Compile Include="Harmony\Interfaces\IEntityPlayerLocal.cs"/>
+        <Compile Include="Harmony\Interfaces\IGUIWindowManager.cs"/>
+        <Compile Include="Harmony\Interfaces\ILocalPlayerUI.cs"/>
+        <Compile Include="Harmony\Interfaces\IXUi.cs"/>
+        <Compile Include="Harmony\Interfaces\IXUiController.cs"/>
+        <Compile Include="Harmony\Interfaces\IXUiControllerChild.cs"/>
+        <Compile Include="Harmony\Interfaces\IXUiView.cs"/>
         <Compile Include="Harmony\Main.cs"/>
         <Compile Include="Harmony\Logger.cs"/>
-        <Compile Include="Harmony\ToggleToolBelt.cs"/>
-        <Compile Include="Harmony\Wrappers.cs"/>
+        <Compile Include="Harmony\Seams\GUIWindowManagerSeam.cs"/>
+        <Compile Include="Harmony\Seams\XUiControllerChildSeam.cs"/>
+        <Compile Include="Harmony\Seams\XUiControllerSeam.cs"/>
+        <Compile Include="Harmony\Seams\XUiSeam.cs"/>
+        <Compile Include="Harmony\Seams\XUiViewSeam.cs"/>
+        <Compile Include="Harmony\ToolBelt.cs"/>
+        <Compile Include="Harmony\Seams\EntityPlayerLocalSeam.cs"/>
+        <Compile Include="Harmony\Seams\LocalPlayerUISeam.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
 
