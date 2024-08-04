@@ -4,7 +4,7 @@
 [![nexus-mods-page](https://img.shields.io/badge/Nexus%20Mod-Immersive%20Crosshair%20-orange?style=flat-square&logo=spinrilla)](https://www.nexusmods.com/7daystodie/mods/5649)
 [![github-repository](https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github)](https://github.com/rdok/7daystodie_mod_immersive_tool_belt)
 
-> **Immersive Tool Belt:** Tool belt when you need. Hide when you don't. 
+> **Immersive Tool Belt:** Tool belt when you need. Hide when you don't.  
 > **EAC Caveat:** This mod uses custom code that is not compatible with Easy Anti-Cheat (EAC).
 
 [![Immersive Tool Belts Showcase](https://github.com/rdok/7daystodie_mod_immersive_tool_belt/blob/main/documentation/showcase.gif?raw=true)](https://www.nexusmods.com/7daystodie/mods/5649)
