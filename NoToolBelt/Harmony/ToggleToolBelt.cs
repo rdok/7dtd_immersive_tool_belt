@@ -33,16 +33,19 @@ namespace ImmersiveCrosshair.Harmony
                 var toolbeltWindow = toolbeltGroup.GetChildById(windowToolbeltName);
                 if (toolbeltWindow == null) return;
 
-                bool isInventoryOpen = xui.playerUI.windowManager.IsWindowOpen("backpack");
+                var isInventoryOpen = xui.playerUI.windowManager.IsWindowOpen("backpack");
+                var toolBeltWindowIsOpen = toolbeltWindow.ViewComponent.IsVisible;
 
-                if (isInventoryOpen && !toolbeltWindow.ViewComponent.IsVisible)
+                if (isInventoryOpen && !toolBeltWindowIsOpen)
                 {
                     Logger.Info("Inventory open, showing windowToolbelt.");
+                    toolbeltWindow.ViewComponent.ForceHide = false; 
                     toolbeltWindow.ViewComponent.IsVisible = true;
                 }
-                else if (!isInventoryOpen && toolbeltWindow.ViewComponent.IsVisible)
+                else if (!isInventoryOpen && toolBeltWindowIsOpen)
                 {
                     Logger.Info("Inventory closed, hiding windowToolbelt.");
+                    toolbeltWindow.ViewComponent.ForceHide = true;
                     toolbeltWindow.ViewComponent.IsVisible = false;
                 }
             }
