@@ -15,7 +15,7 @@
 ## Changelog  
 #### v1.0.0 - 04 Aug 2024
 - Hide tool belt when backpack is closed.
-- Enable tool belt when backpack is closed.
+- Enable tool belt when backpack is opened.
 
 ## Recommended Mods
 > These mods have been manually verified for compatibility, though my gameplay. They all are in the spirit of less is more.
