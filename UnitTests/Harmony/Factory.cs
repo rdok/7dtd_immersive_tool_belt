@@ -7,77 +7,58 @@ namespace UnitTests.Harmony;
 
 public static class Factory
 {
-    public static (Mock<IEntityPlayerLocal> playerLocal, Mock<ILocalPlayerUI> playerUI) CreatePostfixFactory(
-        Dictionary<string, object> parameters = null)
+    public static FactoryContainer Create(Dictionary<string, object> parameters = null)
     {
-//         var hitInfo = new Mock<IWorldRayHitInfo>();
-//         var inventory = new Mock<ImmersiveToolBelt.Harmony.IInventory>();
-//         var itemClassMock = new Mock<IItemClass>();
-//         var hit = new Mock<IHitInfoDetails>();
-//         var holdingItemItemValue = new Mock<IItemValue>();
-//         var logger = new Mock<ILogger>();
-//
-//         var hasHud = parameters.ContainsKey("HasHud") && (bool)parameters["HasHud"];
-//         var hasHitInfo = parameters.ContainsKey("HitInfo") && (bool)parameters["HitInfo"];
-//         var hasBHitValid = parameters.ContainsKey("bHitValid") && (bool)parameters["bHitValid"];
-//         var distanceSq = parameters.ContainsKey("hit.distanceSq") ? (float)parameters["hit.distanceSq"] : 1;
-//
-//         holdingItemItemValue.Setup(p => p.ItemClass).Returns(itemClassMock.Object);
-//         inventory.Setup(p => p.holdingItemItemValue)
-//             .Returns(holdingItemItemValue.Object);
-//         playerUI.Setup(p => p.GetComponentInChildren<IGuiWdwInGameHUD>())
-//             .Returns(hasHud ? hudMock.Object : null);
-//         playerLocal.Setup(p => p.HitInfo)
-//             .Returns(hasHitInfo ? hitInfo.Object : null);
-//         hitInfo.Setup(p => p.bHitValid).Returns(hasBHitValid);
-//         hitInfo.Setup(p => p.hit).Returns(hit.Object);
-//         hit.Setup(p => p.distanceSq).Returns(distanceSq);
-//
-//         var actions = new List<IItemAction>();
-//
-//         var itemActionRanged = new Mock<IItemActionRanged>();
-//         var holdingRanged = parameters.ContainsKey("holdingRanged") && (bool)parameters["holdingRanged"];
-//         itemActionRanged.Setup(p => p.IsRanged).Returns(holdingRanged);
-//         if (holdingRanged) actions.Add(itemActionRanged.Object);
-//
-//         var itemActionRepair = new Mock<IItemActionRepair>();
-//         var holdingRepair = parameters.ContainsKey("holdingRepair") && (bool)parameters["holdingRepair"];
-//         itemActionRepair.Setup(p => p.IsRepair).Returns(holdingRepair);
-//         if (holdingRepair) actions.Add(itemActionRepair.Object);
-//
-//         var itemActionHarvest = new Mock<IItemActionHarvest>();
-//         var holdingHarvest =
-//             parameters.ContainsKey("holdingHarvest") && (bool)parameters["holdingHarvest"];
-//         itemActionHarvest.Setup(p => p.IsHarvest).Returns(holdingHarvest);
-//         if (holdingHarvest) actions.Add(itemActionHarvest.Object);
-//
-//         var itemActionSalvage = new Mock<IItemActionSalvage>();
-//         var holdingSalvage =
-//             parameters.ContainsKey("holdingSalvage") && (bool)parameters["holdingSalvage"];
-//         itemActionSalvage.Setup(p => p.IsSalvage).Returns(holdingSalvage);
-//         if (holdingSalvage) actions.Add(itemActionSalvage.Object);
-//
-//         var itemActionBareHands = new Mock<IItemActionBareHands>();
-//         itemActionBareHands.Setup(p => p.IsBareHands).Returns(holdingBareHands);
-//         if (holdingBareHands) actions.Add(itemActionBareHands.Object);
-//
-//         itemClassMock.Setup(p => p.Actions).Returns(actions.ToArray());
-//
-        var playerLocal = new Mock<IEntityPlayerLocal>();
-        var playerUI = new Mock<ILocalPlayerUI>();
-        playerLocal.Setup(p => p.PlayerUI).Returns(playerUI.Object);
+        var toolBeltWindowGroupMock = new Mock<IXUiController>();
+        var xuiMock = new Mock<IXUi>();
+        var playerUIMock = new Mock<ILocalPlayerUI>();
+        var entityPlayerLocalMock = new Mock<IEntityPlayerLocal>();
 
-        if (parameters == null) return (playerLocal, playerUI);
+        if (parameters == null)
+        {
+            return new FactoryContainer
+            {
+                entityPlayerLocalMock = entityPlayerLocalMock,
+                playerUIMock = playerUIMock,
+                xUIMock = xuiMock
+            };
+        }
+        
+        var hasXui = parameters.ContainsKey("hasXui") && (bool)parameters["hasXui"];
+        var xui = hasXui ? xuiMock.Object : null;
+        playerUIMock.Setup(p => p.xui).Returns(xui);
+
+        var hasToolBeltGroup = parameters.ContainsKey("hasToolBeltGroup") && (bool)parameters["hasToolBeltGroup"];
+        var toolBeltGroup = hasToolBeltGroup ? toolBeltWindowGroupMock.Object : null;
+        xuiMock.Setup(p => p.FindWindowGroupByName("toolbelt")).Returns(toolBeltGroup);
+
+        var hasPlayerUI = parameters.ContainsKey("PlayerUI") && (bool)parameters["PlayerUI"];
+        var playerUIInstance = hasPlayerUI ? playerUIMock.Object : null;
+        entityPlayerLocalMock.Setup(p => p.PlayerUI).Returns(playerUIInstance);
 
         var bPlayerStatsChanged =
             parameters.ContainsKey("bPlayerStatsChanged") && (bool)parameters["bPlayerStatsChanged"];
-        playerLocal.Setup(p => p.bPlayerStatsChanged).Returns(bPlayerStatsChanged);
-        
+        entityPlayerLocalMock.Setup(p => p.bPlayerStatsChanged).Returns(bPlayerStatsChanged);
+
         var logger = new Mock<ILogger>();
 
-        ImmersiveToolBelt.Harmony.ToolBelt.SetLogger(logger.Object);
-//
-        return (playerLocal, playerUI);
-//     }
+
+        ToolBelt.SetLogger(logger.Object);
+
+        return new FactoryContainer
+        {
+            entityPlayerLocalMock = entityPlayerLocalMock,
+            playerUIMock = playerUIMock,
+            xUIMock = xuiMock,
+            toolBeltWindowGroupMock = toolBeltWindowGroupMock
+        };
     }
+}
+
+public class FactoryContainer
+{
+    public Mock<IXUiController> toolBeltWindowGroupMock { get; set; }
+    public Mock<IEntityPlayerLocal> entityPlayerLocalMock { get; set; }
+    public Mock<ILocalPlayerUI> playerUIMock { get; set; }
+    public Mock<IXUi> xUIMock { get; set; }
 }
