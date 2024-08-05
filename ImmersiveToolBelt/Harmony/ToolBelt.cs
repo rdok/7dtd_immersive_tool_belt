@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System;
+using HarmonyLib;
 using ImmersiveToolBelt.Harmony.Interfaces;
 using ImmersiveToolBelt.Harmony.Seams;
 
@@ -8,6 +9,7 @@ namespace ImmersiveToolBelt.Harmony
     public static class ToolBelt
     {
         private static ILogger _logger = new Logger();
+        public static DateTime BackpackHiddenAt;
 
         public static void SetLogger(ILogger logger)
         {
@@ -17,10 +19,11 @@ namespace ImmersiveToolBelt.Harmony
         public static void Postfix(EntityPlayerLocal __instance)
         {
             var entityPlayerLocalWrapper = new EntityPlayerLocalSeam(__instance);
-            UpdateVisibility(entityPlayerLocalWrapper);
+            var dateTimeSeam = new DateTimeSeam();
+            PostfixWrapper(entityPlayerLocalWrapper, dateTimeSeam);
         }
 
-        public static void UpdateVisibility(IEntityPlayerLocal player)
+        public static void PostfixWrapper(IEntityPlayerLocal player, IDateTime dateTime)
         {
             if (player == null) return;
             if (player.bPlayerStatsChanged) return;
@@ -28,7 +31,7 @@ namespace ImmersiveToolBelt.Harmony
             var playerUI = player.PlayerUI;
             if (playerUI == null) return;
 
-            var xui = playerUI.xui; // TODO: repalace withwindow manager check
+            var xui = playerUI.xui; // TODO: replace with window manager check
             if (xui == null) return;
 
             var toolBeltWindowGroup = xui.FindWindowGroupByName("toolbelt");
@@ -37,21 +40,42 @@ namespace ImmersiveToolBelt.Harmony
             var toolBeltWindow = toolBeltWindowGroup.GetChildById("windowToolbelt");
             if (toolBeltWindow == null) return;
 
-            var isBackpackOpen = playerUI.windowManager.IsWindowOpen("backpack");
-            var toolBeltWindowIsOpen = toolBeltWindow.ViewComponent.IsVisible;
+            var isBackpackVisible = playerUI.windowManager.IsWindowOpen("backpack");
+            var isToolBeltVisible = toolBeltWindow.ViewComponent.IsVisible;
 
-            if (isBackpackOpen && !toolBeltWindowIsOpen)
+            if (isBackpackVisible == isToolBeltVisible)
             {
-                _logger.Info("Inventory open, showing windowToolbelt.");
+                return;
+            }
+
+            if (isBackpackVisible)
+            {
+                _logger.Info("Backpack visible, tool belt is not. Showing tool belt.");
                 toolBeltWindow.ViewComponent.ForceHide = false;
                 toolBeltWindow.ViewComponent.IsVisible = true;
+                return;
             }
-            else if (!isBackpackOpen && toolBeltWindowIsOpen)
+
+            var now = dateTime.Now();
+            if (BackpackHiddenAt == DateTime.MinValue)
             {
-                _logger.Info("Inventory closed, hiding windowToolbelt.");
-                toolBeltWindow.ViewComponent.ForceHide = true;
-                toolBeltWindow.ViewComponent.IsVisible = false;
+                BackpackHiddenAt = now;
             }
+
+            const int hideDelaySeconds = 3;
+            var secondsSinceBackpackHidden = (now - BackpackHiddenAt).TotalSeconds;
+            var hideDelayElapsed = secondsSinceBackpackHidden >= hideDelaySeconds;
+
+            if (!hideDelayElapsed)
+            {
+                _logger.Info($"{secondsSinceBackpackHidden} seconds passed since Backpack closed.");
+                return;
+            }
+
+            _logger.Info($"{secondsSinceBackpackHidden} seconds passed since Backpack closed, hiding windowToolbelt.");
+            toolBeltWindow.ViewComponent.ForceHide = true;
+            toolBeltWindow.ViewComponent.IsVisible = false;
+            BackpackHiddenAt = DateTime.MinValue;
         }
     }
 }

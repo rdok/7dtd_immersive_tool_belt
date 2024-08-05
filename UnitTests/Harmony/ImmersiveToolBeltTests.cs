@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ImmersiveToolBelt.Harmony;
+using Moq;
 using NUnit.Framework;
 
 namespace UnitTests.Harmony;
@@ -11,7 +12,7 @@ public class ImmersiveToolBeltInitTests
     public void it_skips_update_having_no_player_instance()
     {
         var factory = Factory.Create();
-        ToolBelt.UpdateVisibility(null);
+        ToolBelt.PostfixWrapper(null, null);
         factory.entityPlayerLocalMock.VerifyNoOtherCalls();
     }
 
@@ -22,7 +23,7 @@ public class ImmersiveToolBeltInitTests
         {
             ["bPlayerStatsChanged"] = true
         });
-        ToolBelt.UpdateVisibility(factory.entityPlayerLocalMock.Object);
+        ToolBelt.PostfixWrapper(factory.entityPlayerLocalMock.Object, null);
         factory.playerUIMock.VerifyNoOtherCalls();
     }
 
@@ -34,7 +35,7 @@ public class ImmersiveToolBeltInitTests
             ["bPlayerStatsChanged"] = false,
             ["PlayerUI"] = false
         });
-        ToolBelt.UpdateVisibility(factory.entityPlayerLocalMock.Object);
+        ToolBelt.PostfixWrapper(factory.entityPlayerLocalMock.Object, null);
         factory.xUIMock.VerifyNoOtherCalls();
     }
 
@@ -47,7 +48,7 @@ public class ImmersiveToolBeltInitTests
             ["PlayerUI"] = true,
             ["hasXui"] = false
         });
-        ToolBelt.UpdateVisibility(factory.entityPlayerLocalMock.Object);
+        ToolBelt.PostfixWrapper(factory.entityPlayerLocalMock.Object, null);
         factory.xUIMock.VerifyNoOtherCalls();
     }
 
@@ -61,7 +62,7 @@ public class ImmersiveToolBeltInitTests
             ["hasXui"] = true,
             ["hasToolBeltWindowGroup"] = true
         });
-        ToolBelt.UpdateVisibility(factory.entityPlayerLocalMock.Object);
+        ToolBelt.PostfixWrapper(factory.entityPlayerLocalMock.Object, null);
         factory.toolBeltWindowMock.VerifyNoOtherCalls();
     }
 
@@ -76,12 +77,12 @@ public class ImmersiveToolBeltInitTests
             ["hasToolBeltWindowGroup"] = true,
             ["hasWindowManager"] = false
         });
-        ToolBelt.UpdateVisibility(factory.entityPlayerLocalMock.Object);
+        ToolBelt.PostfixWrapper(factory.entityPlayerLocalMock.Object, null);
         factory.windowManagerMock.VerifyNoOtherCalls();
     }
 
     [Test]
-    public void it_checks_if_backpack_is_open()
+    public void it_checks_if_backpack_is_visible()
     {
         var factory = Factory.Create(new Dictionary<string, object>
         {
@@ -93,12 +94,12 @@ public class ImmersiveToolBeltInitTests
             ["hasWindowManager"] = true,
             ["hasViewComponent"] = true
         });
-        ToolBelt.UpdateVisibility(factory.entityPlayerLocalMock.Object);
+        ToolBelt.PostfixWrapper(factory.entityPlayerLocalMock.Object, factory.now);
         factory.windowManagerMock.Verify(h => h.IsWindowOpen("backpack"));
     }
 
     [Test]
-    public void it_hides_the_tool_belt_window_having_backpack_open_and_tool_belt_closed()
+    public void it_hides_the_tool_belt_having_backpack_hidden_and_tool_belt_visible()
     {
         var factory = Factory.Create(new Dictionary<string, object>
         {
@@ -109,16 +110,17 @@ public class ImmersiveToolBeltInitTests
             ["hasToolBeltWindow"] = true,
             ["hasWindowManager"] = true,
             ["hasViewComponent"] = true,
-            ["isBackpackOpen"] = true,
-            ["isToolBeltOpen"] = false
+            ["isBackpackVisible"] = false,
+            ["isToolBeltVisible"] = true,
+            ["hideDelayElapsed"] = true
         });
-        ToolBelt.UpdateVisibility(factory.entityPlayerLocalMock.Object);
-        factory.viewComponentMock.VerifySet(h => h.ForceHide = false);
-        factory.viewComponentMock.VerifySet(h => h.IsVisible = true);
+        ToolBelt.PostfixWrapper(factory.entityPlayerLocalMock.Object, factory.now);
+        factory.viewComponentMock.VerifySet(h => h.ForceHide = true);
+        factory.viewComponentMock.VerifySet(h => h.IsVisible = false);
     }
 
     [Test]
-    public void it_shows_the_tool_belt_window_having_backpack_closed_and_tool_belt_open()
+    public void it_shows_the_tool_belt_window_having_backpack_visible_and_tool_belt_hidden()
     {
         var factory = Factory.Create(new Dictionary<string, object>
         {
@@ -129,11 +131,54 @@ public class ImmersiveToolBeltInitTests
             ["hasToolBeltWindow"] = true,
             ["hasWindowManager"] = true,
             ["hasViewComponent"] = true,
-            ["isBackpackOpen"] = false,
-            ["isToolBeltOpen"] = true
+            ["isBackpackVisible"] = true,
+            ["isToolBeltVisible"] = false,
+            ["hideDelayElapsed"] = true
         });
-        ToolBelt.UpdateVisibility(factory.entityPlayerLocalMock.Object);
-        factory.viewComponentMock.VerifySet(h => h.ForceHide = true);
-        factory.viewComponentMock.VerifySet(h => h.IsVisible = false);
+        ToolBelt.PostfixWrapper(factory.entityPlayerLocalMock.Object, factory.now);
+        factory.viewComponentMock.VerifySet(h => h.ForceHide = false);
+        factory.viewComponentMock.VerifySet(h => h.IsVisible = true);
+    }
+    
+    [Test]
+    public void it_does_not_show_the_tool_belt_having_backpack_hidden_less_than_the_delay_threshold()
+    {
+        var factory = Factory.Create(new Dictionary<string, object>
+        {
+            ["bPlayerStatsChanged"] = false,
+            ["PlayerUI"] = true,
+            ["hasXui"] = true,
+            ["hasToolBeltWindowGroup"] = true,
+            ["hasToolBeltWindow"] = true,
+            ["hasWindowManager"] = true,
+            ["hasViewComponent"] = true,
+            ["isBackpackVisible"] = false,
+            ["isToolBeltVisible"] = true,
+            ["hideDelayElapsed"] = false
+        });
+        ToolBelt.PostfixWrapper(factory.entityPlayerLocalMock.Object, factory.now);
+        factory.viewComponentMock.VerifySet(v => v.IsVisible = It.IsAny<bool>(), Times.Never());
+    }
+
+    [Test]
+    public void it_keeps_concealing_the_tool_belt_after_the_first_one()
+    {
+        var factory = Factory.Create(new Dictionary<string, object>
+        {
+            ["bPlayerStatsChanged"] = false,
+            ["PlayerUI"] = true,
+            ["hasXui"] = true,
+            ["hasToolBeltWindowGroup"] = true,
+            ["hasToolBeltWindow"] = true,
+            ["hasWindowManager"] = true,
+            ["hasViewComponent"] = true,
+            ["isBackpackVisible"] = false,
+            ["isToolBeltVisible"] = true,
+            ["hideDelayElapsed"] = true
+        });
+        ToolBelt.PostfixWrapper(factory.entityPlayerLocalMock.Object, factory.now);
+        ToolBelt.PostfixWrapper(factory.entityPlayerLocalMock.Object, factory.now);
+        factory.viewComponentMock.VerifySet(v => v.IsVisible = false, Times.Exactly(1));
+        factory.viewComponentMock.VerifySet(v => v.ForceHide = true, Times.Exactly(1));
     }
 }
