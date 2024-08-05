@@ -11,11 +11,13 @@
 
 - 7daystodie Version: 1.0 (b333)
 - Install with [Vortex](https://www.nexusmods.com/about/vortex/).
+- Compatible with mods like [SteelUI - Black UI Theme And Custom HUD](https://www.nexusmods.com/7daystodie/mods/5131)
 
 ## Changelog  
 #### v1.0.0 - 04 Aug 2024
 - Hide tool belt when backpack is closed.
 - Enable tool belt when backpack is opened.
+
 
 ## Recommended Mods
 > These mods have been manually verified for compatibility, though my gameplay. They all are in the spirit of less is more.
