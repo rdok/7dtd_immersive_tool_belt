@@ -8,6 +8,10 @@
 
 [![Immersive Tool Belts Showcase](https://github.com/rdok/7daystodie_mod_immersive_tool_belt/blob/main/documentation/showcase.gif?raw=true)](https://www.nexusmods.com/7daystodie/mods/5649)
 
+
+#### Compatibility with [SteelUI - Black UI Theme And Custom HUD](https://www.nexusmods.com/7daystodie/mods/5131)
+[![Compatibility with SteelUI - Black Theme Showcase](https://github.com/rdok/7daystodie_mod_immersive_tool_belt/blob/main/documentation/showcase_compatibility_with_steel_hud.gif?raw=true)](https://www.nexusmods.com/7daystodie/mods/5649)
+
 - 7daystodie Version: 1.0 (b333)
 - Install with [Vortex](https://www.nexusmods.com/about/vortex/).
 - Compatible with mods like [SteelUI - Black UI Theme And Custom HUD](https://www.nexusmods.com/7daystodie/mods/5131)
