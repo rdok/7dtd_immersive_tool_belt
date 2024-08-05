@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using ImmersiveToolBelt.Harmony;
 using ImmersiveToolBelt.Harmony.Interfaces;
+using ImmersiveToolBelt.Harmony.Seams;
 using Moq;
 
 namespace UnitTests.Harmony;
@@ -17,14 +19,23 @@ public static class Factory
         var toolBeltWindowMock = new Mock<IXUiControllerChild>();
         var viewComponentMock = new Mock<IXUiView>();
 
-
         if (parameters == null)
+        {
             return new FactoryContainer
             {
                 entityPlayerLocalMock = entityPlayerLocalMock,
                 playerUIMock = playerUIMock,
                 xUIMock = xuiMock
             };
+        }
+
+        var hideDelayElapsed = parameters.ContainsKey("hideDelayElapsed") && (bool)parameters["hideDelayElapsed"];
+        var currentTime = new DateTime(2024, 8, 5, 10, 0, 0);
+        var dateTimeSeam = new DateTimeSeam(() => currentTime);
+        if (hideDelayElapsed)
+        {
+            ToolBelt.BackpackHiddenAt = currentTime.AddSeconds(-4);
+        }
 
         var hasXui = parameters.ContainsKey("hasXui") && (bool)parameters["hasXui"];
         var xui = hasXui ? xuiMock.Object : null;
@@ -34,8 +45,8 @@ public static class Factory
         var windowManager = hasWindowManager ? windowManagerMock.Object : null;
         playerUIMock.Setup(p => p.windowManager).Returns(windowManager);
 
-        var isBackpackOpen = parameters.ContainsKey("isBackpackOpen") && (bool)parameters["isBackpackOpen"];
-        windowManagerMock.Setup(p => p.IsWindowOpen("backpack")).Returns(isBackpackOpen);
+        var isBackpackVisible = parameters.ContainsKey("isBackpackVisible") && (bool)parameters["isBackpackVisible"];
+        windowManagerMock.Setup(p => p.IsWindowOpen("backpack")).Returns(isBackpackVisible);
 
         var isVisible =
             parameters.ContainsKey("isVisible") && (bool)parameters["isVisible"];
@@ -46,9 +57,9 @@ public static class Factory
         var viewComponent = hasViewComponent ? viewComponentMock.Object : null;
         toolBeltWindowMock.Setup(p => p.ViewComponent).Returns(viewComponent);
 
-        var hasToolBeltOpen =
-            parameters.ContainsKey("isToolBeltOpen") && (bool)parameters["isToolBeltOpen"];
-        viewComponentMock.Setup(p => p.IsVisible).Returns(hasToolBeltOpen);
+        var isToolBeltVisible =
+            parameters.ContainsKey("isToolBeltVisible") && (bool)parameters["isToolBeltVisible"];
+        viewComponentMock.Setup(p => p.IsVisible).Returns(isToolBeltVisible);
 
         var hasToolBeltWindow =
             parameters.ContainsKey("hasToolBeltWindow") && (bool)parameters["hasToolBeltWindow"];
@@ -70,11 +81,11 @@ public static class Factory
 
         var logger = new Mock<ILogger>();
 
-
         ToolBelt.SetLogger(logger.Object);
 
         return new FactoryContainer
         {
+            now = dateTimeSeam,
             entityPlayerLocalMock = entityPlayerLocalMock,
             playerUIMock = playerUIMock,
             xUIMock = xuiMock,
@@ -95,4 +106,5 @@ public class FactoryContainer
     public Mock<IXUi> xUIMock { get; set; }
     public Mock<IGUIWindowManager> windowManagerMock { get; set; }
     public Mock<IXUiView> viewComponentMock { get; set; }
+    public IDateTime now { get; set; }
 }
