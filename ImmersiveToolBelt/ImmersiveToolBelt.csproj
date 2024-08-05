@@ -40,6 +40,7 @@
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
     <ItemGroup>
+        <Compile Include="Harmony\Interfaces\IDateTime.cs" />
         <Compile Include="Harmony\Interfaces\IEntityPlayerLocal.cs"/>
         <Compile Include="Harmony\Interfaces\IGUIWindowManager.cs"/>
         <Compile Include="Harmony\Interfaces\ILocalPlayerUI.cs"/>
@@ -49,6 +50,7 @@
         <Compile Include="Harmony\Interfaces\IXUiView.cs"/>
         <Compile Include="Harmony\Main.cs"/>
         <Compile Include="Harmony\Logger.cs"/>
+        <Compile Include="Harmony\Seams\DateTimeSeam.cs" />
         <Compile Include="Harmony\Seams\GUIWindowManagerSeam.cs"/>
         <Compile Include="Harmony\Seams\XUiControllerChildSeam.cs"/>
         <Compile Include="Harmony\Seams\XUiControllerSeam.cs"/>
