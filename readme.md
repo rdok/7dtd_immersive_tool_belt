@@ -14,12 +14,13 @@
 - Compatible with mods like [SteelUI - Black UI Theme And Custom HUD](https://www.nexusmods.com/7daystodie/mods/5131)
 
 ## Changelog  
-#### v1.1.0 - 05 Aug 2024
-- Wait for three seconds before hiding the tool belt.
-- Toggle on the tool belt for three seconds when changing equipped item/changing slots.
-- Many thanks for the idea & suggestions on this to:
-    - [MCT477](https://www.nexusmods.com/7daystodie/users/52409026)
-    - [dujinyuan](https://www.nexusmods.com/7daystodie/users/98186053)
+#### v1.1.1 06 Aug 2024
+- Fixes an issue where tool belt was hidden when assigning items having backpacks open.
+- Many thanks for the issue report to [MrSamuelAdams1992](https://www.nexusmods.com/users/78780238)
+#### v1.1.0 - 06 Aug 2024
+- Wait for three seconds before hiding the tool belt upon closing backpack.
+- Show the tool belt for three seconds when changing equipped item/changed slots.
+- Many thanks for the idea & suggestions on this to: [MCT477](https://www.nexusmods.com/7daystodie/users/52409026), [Khajits](https://www.nexusmods.com/7daystodie/users/37992605), [dujinyuan](https://www.nexusmods.com/7daystodie/users/98186053), [MrSamuelAdams1992](https://next.nexusmods.com/profile/MrSamuelAdams1992)
 #### v1.0.0 - 04 Aug 2024
 - Hide tool belt when backpack is closed.
 - Enable tool belt when backpack is opened.
