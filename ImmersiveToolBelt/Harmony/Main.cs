@@ -8,10 +8,9 @@
         {
             public void InitMod(Mod modInstance)
             {
-                var type = GetType();
-                var message = type.ToString();
-                Logger.Info("Loading Patch: " + message);
-                var harmony = new HarmonyLib.Harmony(message);
+                const string id = "uk.co.rdok.7daystodie.mods.immersive_tool_belt";
+                Logger.Info("Loading Patch: " + id);
+                var harmony = new HarmonyLib.Harmony(id);
                 harmony.PatchAll();
             }
         }
