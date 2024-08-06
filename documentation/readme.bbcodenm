@@ -9,16 +9,20 @@
 [/quote]
 [url=https://www.nexusmods.com/7daystodie/mods/5649][img]https://github.com/rdok/7daystodie_mod_immersive_tool_belt/blob/main/documentation/showcase.gif?raw=true[/img][/url]
 
-
-[size=3]Compatibility with [url=https://www.nexusmods.com/7daystodie/mods/5131]SteelUI - Black UI Theme And Custom HUD[/url][/size]
-[url=https://www.nexusmods.com/7daystodie/mods/5649][img]https://github.com/rdok/7daystodie_mod_immersive_tool_belt/blob/main/documentation/showcase_compatibility_with_steel_hud.gif?raw=true[/img][/url]
-
 [list]
 [*] 7daystodie Version: 1.0 (b333)
 [*] Install with [url=https://www.nexusmods.com/about/vortex/]Vortex[/url].
 [*] Compatible with mods like [url=https://www.nexusmods.com/7daystodie/mods/5131]SteelUI - Black UI Theme And Custom HUD[/url]
 [/list]
 [size=5]Changelog[/size]
+[size=3]v1.1.0 - 05 Aug 2024[/size]
+[list]
+[*] Wait for three seconds before hiding the tool belt.
+[*] Toggle on the tool belt for three seconds when changing equipped item/changing slots.
+[*] Many thanks for the idea & suggestions on this to:
+[list]
+[*] [url=https://www.nexusmods.com/7daystodie/users/52409026]MCT477[/url]
+[*] [url=https://www.nexusmods.com/7daystodie/users/98186053]dujinyuan[/url][/list][/list]
 [size=3]v1.0.0 - 04 Aug 2024[/size]
 [list]
 [*] Hide tool belt when backpack is closed.
