@@ -15,7 +15,7 @@
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModsAbsolutePath>C:\vortex_udf_7_days_to_die</ModsAbsolutePath>
         <ModName>ImmersiveToolBelt</ModName>
-        <ModVersion>1.1.1</ModVersion>
+        <ModVersion>1.2.0</ModVersion>
         <ModDescription>Tool belt when you need. Hide when you don't.</ModDescription>
         <ModId>5649</ModId>
     </PropertyGroup>

@@ -13,6 +13,9 @@
 - Compatible with mods like [SteelUI - Black UI Theme And Custom HUD](https://www.nexusmods.com/7daystodie/mods/5131)
 
 ## Changelog  
+#### v1.2.0 06 Aug 2024
+- Shows tool belt as soon as the player press/scrolls through; whereas previously it happened after the button release and or the item animation completed.
+- Many thanks to [busterbjones](https://next.nexusmods.com/profile/busterbjones) for pointing this issue & suggesting a better approach.
 #### v1.1.1 06 Aug 2024
 - Fixes an issue where tool belt was hidden when assigning items having backpacks open.
 - Many thanks for the issue report to [MrSamuelAdams1992](https://www.nexusmods.com/users/78780238)
