@@ -15,7 +15,7 @@
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModsAbsolutePath>C:\vortex_udf_7_days_to_die</ModsAbsolutePath>
         <ModName>ImmersiveToolBelt</ModName>
-        <ModVersion>1.0.0</ModVersion>
+        <ModVersion>1.1.1</ModVersion>
         <ModDescription>Tool belt when you need. Hide when you don't.</ModDescription>
         <ModId>5649</ModId>
     </PropertyGroup>
@@ -40,6 +40,8 @@
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
     <ItemGroup>
+        <Compile Include="Harmony\Backpack.cs" />
+        <Compile Include="Harmony\ToolBeltEvent.cs" />
         <Compile Include="Harmony\Interfaces\IDateTime.cs" />
         <Compile Include="Harmony\Interfaces\IEntityPlayerLocal.cs"/>
         <Compile Include="Harmony\Interfaces\IGUIWindowManager.cs"/>
@@ -56,9 +58,10 @@
         <Compile Include="Harmony\Seams\XUiControllerSeam.cs"/>
         <Compile Include="Harmony\Seams\XUiSeam.cs"/>
         <Compile Include="Harmony\Seams\XUiViewSeam.cs"/>
-        <Compile Include="Harmony\ToolBelt.cs"/>
+        <Compile Include="Harmony\SlotChangedEvent.cs" />
         <Compile Include="Harmony\Seams\EntityPlayerLocalSeam.cs"/>
         <Compile Include="Harmony\Seams\LocalPlayerUISeam.cs"/>
+        <Compile Include="Harmony\ToolBelt.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
 
