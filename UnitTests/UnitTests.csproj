@@ -69,7 +69,8 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Harmony\Factory.cs"/>
-        <Compile Include="Harmony\ImmersiveToolBeltTests.cs"/>
+        <Compile Include="Harmony\OpenToolBeltTests.cs" />
+        <Compile Include="Harmony\CloseToolBeltTests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
