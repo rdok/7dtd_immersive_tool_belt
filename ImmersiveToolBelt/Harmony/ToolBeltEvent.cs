@@ -1,67 +1,29 @@
-using System;
-
 namespace ImmersiveToolBelt.Harmony
 {
     public static class ToolBeltEvent
     {
-        public static DateTime CreatedAt;
-        public static bool BackpackOnOpen;
-        public static bool BackpackOnClose;
-        public static bool ItemHeldEvent;
-        private static readonly ILogger Logger = new Logger();
+        private static bool _isBackpackOnOpen;
+        private static bool _isBackpackOnClose;
+        public static bool SlotChanged { get; set; }
 
-        public static void DispatchBackpackOnClose()
+        public static bool BackpackOnOpen
         {
-            CreatedAt = DateTime.Now;
-            BackpackOnClose = true;
-            BackpackOnOpen = false;
+            get => _isBackpackOnOpen;
+            set
+            {
+                _isBackpackOnOpen = value;
+                _isBackpackOnClose = !value;
+            }
         }
 
-        public static bool HasHideEvent()
+        public static bool BackpackOnClose
         {
-            return CreatedAt != DateTime.MinValue;
-        }
-
-        public static bool HasBackpackEvent()
-        {
-            return BackpackOnOpen;
-        }
-
-        public static void DispatchBackpackOnOpen()
-        {
-            BackpackOnOpen = true;
-            BackpackOnClose = false;
-        }
-
-        public static void ResetShowEvents()
-        {
-            ItemHeldEvent = false;
-        }
-
-        public static bool HasBackpackOnOpenEvent()
-        {
-            return BackpackOnOpen;
-        }
-
-        public static bool SlotChangedEvent()
-        {
-            return ItemHeldEvent;
-        }
-
-        public static void DispatchSlotChangedEvent()
-        {
-            ItemHeldEvent = true;
-            CreatedAt = DateTime.Now;
-        }
-
-        public static void ResetHideEvents()
-        {
-            CreatedAt = DateTime.MinValue;
-        }
-
-        public static bool HasBackpackOnCloseEvent()
-        {
-            return BackpackOnClose;
+            get => _isBackpackOnClose;
+            set
+            {
+                _isBackpackOnClose = value;
+                _isBackpackOnOpen = !value;
+            }
         }
     }
 }
