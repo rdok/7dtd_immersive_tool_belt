@@ -40,9 +40,10 @@
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="Harmony\Backpack.cs" />
-        <Compile Include="Harmony\ToolBeltEvent.cs" />
-        <Compile Include="Harmony\Interfaces\IDateTime.cs" />
+        <Compile Include="Harmony\Backpack.cs"/>
+        <Compile Include="Harmony\SlotChangedEvent.cs"/>
+        <Compile Include="Harmony\ToolBeltEvent.cs"/>
+        <Compile Include="Harmony\Interfaces\IDateTime.cs"/>
         <Compile Include="Harmony\Interfaces\IEntityPlayerLocal.cs"/>
         <Compile Include="Harmony\Interfaces\IGUIWindowManager.cs"/>
         <Compile Include="Harmony\Interfaces\ILocalPlayerUI.cs"/>
@@ -52,16 +53,15 @@
         <Compile Include="Harmony\Interfaces\IXUiView.cs"/>
         <Compile Include="Harmony\Main.cs"/>
         <Compile Include="Harmony\Logger.cs"/>
-        <Compile Include="Harmony\Seams\DateTimeSeam.cs" />
+        <Compile Include="Harmony\Seams\DateTimeSeam.cs"/>
         <Compile Include="Harmony\Seams\GUIWindowManagerSeam.cs"/>
         <Compile Include="Harmony\Seams\XUiControllerChildSeam.cs"/>
         <Compile Include="Harmony\Seams\XUiControllerSeam.cs"/>
         <Compile Include="Harmony\Seams\XUiSeam.cs"/>
         <Compile Include="Harmony\Seams\XUiViewSeam.cs"/>
-        <Compile Include="Harmony\SlotChangedEvent.cs" />
         <Compile Include="Harmony\Seams\EntityPlayerLocalSeam.cs"/>
         <Compile Include="Harmony\Seams\LocalPlayerUISeam.cs"/>
-        <Compile Include="Harmony\ToolBelt.cs" />
+        <Compile Include="Harmony\ToolBelt.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
 
@@ -79,6 +79,9 @@
         <Reference Include="Assembly-CSharp">
             <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>
             <Private>False</Private>
+        </Reference>
+        <Reference Include="InControl">
+            <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\InControl.dll</HintPath>
         </Reference>
         <Reference Include="LogLibrary">
             <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\LogLibrary.dll</HintPath>
