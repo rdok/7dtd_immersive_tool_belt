@@ -1,10 +1,10 @@
 {
   "repository": {
     "type": "git",
-    "url": "https://github.com/rdok/7daystodie_mod_immersive_tool_belt"
+    "url": "https://github.com/rdok/7dtd_immersive_tool_belt"
   },
   "author": "Rizart Dokollari",
-  "name": "7daystodie_mod_immersive_tool_belt",
+  "name": "7dtd_immersive_tool_belt",
   "license": "GPL-3.0",
   "devDependencies": {
     "7z-bin": "Nexus-Mods/7z-bin",
