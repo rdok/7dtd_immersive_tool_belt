@@ -1,7 +1,6 @@
 [size=6]7 Days to Die Mod - Immersive Tool Belt[/size]
 
-[url=https://www.nexusmods.com/7daystodie/mods/5649][img]https://img.shields.io/badge/Nexus%20Mod-Immersive%20Crosshair%20-orange?style=flat-square&logo=spinrilla[/img][/url]
-[url=https://github.com/rdok/7daystodie_mod_immersive_tool_belt][img]https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github[/img][/url]
+[url=https://next.nexusmods.com/7daystodie/collections/epfqzi][img]https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://www.nexusmods.com/7daystodie/mods/5649][img]https://img.shields.io/badge/Nexus%20Mod-Immersive%20Crosshair%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://github.com/rdok/7daystodie_mod_immersive_tool_belt][img]https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github[/img][/url]
 
 [quote]
 [b]Immersive Tool Belt:[/b] Tool belt when you need. Hide when you don't.  
@@ -9,16 +8,22 @@
 [/quote]
 [url=https://www.nexusmods.com/7daystodie/mods/5649][img]https://github.com/rdok/7daystodie_mod_immersive_tool_belt/blob/main/documentation/showcase.gif?raw=true[/img][/url]
 
+[size=5]Features[/size]
 [list]
+[*] Automatically hides the tool belt three seconds after closing the backpack or switching inventory slots.
+[*] Displays the tool belt after three seconds of inactivity when changing a tool belt slot or opening the backpack.
+[*] Compatible with controllers and mods like [url=https://www.nexusmods.com/7daystodie/mods/5131]SteelUI - Black UI Theme And Custom HUD[/url]
 [*] 7daystodie Version: 1.0 (b333)
 [*] Install with [url=https://www.nexusmods.com/about/vortex/]Vortex[/url].
-[*] Compatible with mods like [url=https://www.nexusmods.com/7daystodie/mods/5131]SteelUI - Black UI Theme And Custom HUD[/url]
 [/list]
 [size=5]Changelog[/size]
+[size=3]v1.3.0 12 Aug 2024[/size]
+[list]
+[*] feat: Adds support for controllers; [url=https://www.nexusmods.com/7daystodie/mods/5649?tab=posts&jump_to_comment=142783683]as reported by  Mebeingocre[/url][/list]
 [size=3]v1.2.0 06 Aug 2024[/size]
 [list]
-[*] Shows tool belt as soon as the player press/scrolls through; whereas previously it happened after the button release and or the item animation completed.
-[*] Many thanks to [url=https://next.nexusmods.com/profile/busterbjones]busterbjones[/url] for pointing this issue & suggesting a better approach.[/list]
+[*] The tool belt now appears as soon as the player presses or scrolls through, whereas previously it would only appear after releasing the button or completing the item animation.
+[*] Many thanks to [url=https://next.nexusmods.com/profile/busterbjones]busterbjones[/url]for identifying this issue and suggesting a better approach.[/list]
 [size=3]v1.1.1 06 Aug 2024[/size]
 [list]
 [*] Fixes an issue where tool belt was hidden when assigning items having backpacks open.
@@ -32,12 +37,4 @@
 [list]
 [*] Hide tool belt when backpack is closed.
 [*] Enable tool belt when backpack is opened.
-[/list]
-
-[size=5]Recommended Mods[/size]
-[quote]
-These mods have been manually verified for compatibility, though my gameplay. They all are in the spirit of less is more.
-[/quote]
-[list]
-[*] [url=https://next.nexusmods.com/profile/Rizarttt/mods?gameId=1059&sortBy=updatedAt]7 Days to Die Mods[/url]
 [/list]
