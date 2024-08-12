@@ -18,6 +18,10 @@ const buildDir = join(distDir, newModName);
 
 try {
     unlinkSync(artifact);
+} catch (e) {
+    // Expected behavior if it doesn't exist.
+}
+try {
     rmSync(distDir, {recursive: true});
 } catch (e) {
     // Expected behavior if it doesn't exist.
