@@ -7,16 +7,16 @@ using Moq;
 
 namespace UnitTests.Harmony;
 
-public static class Factory
+public static class ToolBeltFactory
 {
-    public static FactoryContainer Create(Dictionary<string, object> parameters = null)
+    public static ToolBeltContainer Create(Dictionary<string, object> parameters = null)
     {
         var toolBeltMock = new Mock<IXUiView>();
         var loggerMock = new Mock<ILogger>();
 
         ToolBelt.SetLogger(loggerMock.Object);
 
-        if (parameters == null) return new FactoryContainer { toolBeltMock = toolBeltMock };
+        if (parameters == null) return new ToolBeltContainer { toolBeltMock = toolBeltMock };
 
         var backpackOnOpen = parameters.ContainsKey("BackpackOnOpen") && (bool)parameters["BackpackOnOpen"];
         ToolBeltEvent.BackpackOnOpen = backpackOnOpen;
@@ -34,7 +34,7 @@ public static class Factory
             parameters.ContainsKey("toolBeltIsVisible") && (bool)parameters["toolBeltIsVisible"];
         toolBeltMock.Setup(p => p.IsVisible).Returns(toolBeltIsVisible);
 
-        return new FactoryContainer
+        return new ToolBeltContainer()
         {
             now = dateTimeSeam,
             toolBeltMock = toolBeltMock,
@@ -42,7 +42,7 @@ public static class Factory
     }
 }
 
-public class FactoryContainer
+public class ToolBeltContainer
 {
     public Mock<IXUiView> toolBeltMock { get; set; }
     public IDateTime now { get; set; }
