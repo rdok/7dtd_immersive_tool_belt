@@ -12,7 +12,8 @@ namespace ImmersiveToolBelt.Harmony.Seams
             _entityPlayerLocal = entityPlayerLocal ?? throw new ArgumentNullException(nameof(entityPlayerLocal));
         }
 
-        public ILocalPlayerUI PlayerUI => new LocalPlayerUISeam(_entityPlayerLocal.PlayerUI);
+        public ILocalPlayerUI playerUI => new LocalPlayerUISeam(_entityPlayerLocal.PlayerUI);
         public bool bPlayerStatsChanged => _entityPlayerLocal.bPlayerStatsChanged;
+        public IPlayerActionsLocal playerInput => new PlayerActionsLocalSeam(_entityPlayerLocal.playerInput);
     }
 }

@@ -11,7 +11,7 @@ public class CloseToolBeltTests
     [Test]
     public void sets_the_delayer_time_having_backpack_close()
     {
-        var factory = Factory.Create(new Dictionary<string, object> { ["BackpackOnClose"] = false });
+        var factory = ToolBeltFactory.Create(new Dictionary<string, object> { ["BackpackOnClose"] = false });
         ToolBelt.DelayTimerSetAt = DateTime.MinValue;
         ToolBelt.Wrapper(factory.toolBeltMock.Object, factory.now);
         Assert.AreEqual(factory.now.Now(), ToolBelt.DelayTimerSetAt);
@@ -20,7 +20,7 @@ public class CloseToolBeltTests
     [Test]
     public void closes_the_tool_belt_having_hide_delayed_elapsed()
     {
-        var factory = Factory.Create(new Dictionary<string, object>
+        var factory = ToolBeltFactory.Create(new Dictionary<string, object>
         {
             ["BackpackOnClose"] = false,
             ["toolBeltIsVisible"] = true,
@@ -35,7 +35,7 @@ public class CloseToolBeltTests
     [Test]
     public void does_not_close_the_tool_belt_having_delay_timer_not_elapse()
     {
-        var factory = Factory.Create(new Dictionary<string, object>
+        var factory = ToolBeltFactory.Create(new Dictionary<string, object>
         {
             ["BackpackOnClose"] = false,
             ["toolBeltIsVisible"] = true,

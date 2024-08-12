@@ -41,6 +41,11 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="Harmony\Backpack.cs"/>
+        <Compile Include="Harmony\Interfaces\IPlayerAction.cs" />
+        <Compile Include="Harmony\Interfaces\IPlayerActionsLocal.cs" />
+        <Compile Include="Harmony\Interfaces\IPlayerInput.cs" />
+        <Compile Include="Harmony\Seams\PlayerActionsLocalSeam.cs" />
+        <Compile Include="Harmony\Seams\PlayerActionSteam.cs" />
         <Compile Include="Harmony\SlotChangedEvent.cs"/>
         <Compile Include="Harmony\ToolBeltEvent.cs"/>
         <Compile Include="Harmony\Interfaces\IDateTime.cs"/>
@@ -82,6 +87,7 @@
         </Reference>
         <Reference Include="InControl">
             <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\InControl.dll</HintPath>
+            <Private>False</Private>
         </Reference>
         <Reference Include="LogLibrary">
             <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\LogLibrary.dll</HintPath>
