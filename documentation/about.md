@@ -11,8 +11,7 @@
 - Automatically hides the tool belt three seconds after closing the backpack or switching inventory slots.
 - Displays the tool belt after three seconds of inactivity when changing a tool belt slot or opening the backpack.
 - Compatible with controllers and mods like [SteelUI - Black UI Theme And Custom HUD](https://www.nexusmods.com/7daystodie/mods/5131)
-- 7daystodie Version: 1.0 (b333)
-- Install with [Vortex](https://www.nexusmods.com/about/vortex/).
+- Game Version: 1.0. Install with [Vortex](https://www.nexusmods.com/about/vortex/).
 
 ## Changelog  
 #### v1.3.0 12 Aug 2024
