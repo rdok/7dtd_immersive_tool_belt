@@ -4,6 +4,11 @@ namespace ImmersiveToolBelt.Harmony
     {
         public void Info(string message)
         {
+            Log.Out("[ImmersiveToolBelt: " + message);
+        }
+
+        public void Debug(string message)
+        {
 #if DEBUG
             Log.Out("[ImmersiveToolBelt: " + message);
 #endif
@@ -34,6 +39,7 @@ namespace ImmersiveToolBelt.Harmony
     public interface ILogger
     {
         void Info(string message);
+        void Debug(string message);
         void Warn(string message);
         void Warning(string message);
         void Error(string message);

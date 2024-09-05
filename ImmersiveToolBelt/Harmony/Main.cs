@@ -9,7 +9,7 @@
             public void InitMod(Mod modInstance)
             {
                 const string id = "uk.co.rdok.7daystodie.mods.immersive_tool_belt";
-                Logger.Info("Loading Patch: " + id);
+                Logger.Debug("Loading Patch: " + id);
                 var harmony = new HarmonyLib.Harmony(id);
                 harmony.PatchAll();
             }
