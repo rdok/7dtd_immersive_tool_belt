@@ -11,10 +11,13 @@ namespace ImmersiveToolBelt.Harmony
 
         public static void Prefix(EntityPlayerLocal __instance)
         {
-            Wrapper(new EntityPlayerLocalSeam(__instance));
+            var toolBeltEvent = new ToolBeltEventSeam();
+            Wrapper(new EntityPlayerLocalSeam(__instance), toolBeltEvent);
         }
 
-        public static void Wrapper(IEntityPlayerLocal entityPlayerLocal)
+        public static void Wrapper(
+            IEntityPlayerLocal entityPlayerLocal, IToolBeltEvent toolBeltEvent
+        )
         {
             var playerInput = entityPlayerLocal.playerInput;
             if (playerInput == null) return;
@@ -26,9 +29,9 @@ namespace ImmersiveToolBelt.Harmony
 
             if (!slotChangedEvent) return;
 
-            Logger.Debug($"[EntityPlayerLocal]: slotChangedEvent");
+            Logger.Debug("[EntityPlayerLocal]: slotChangedEvent");
 
-            ToolBeltEvent.Trigger();
+            toolBeltEvent.Trigger();
         }
     }
 }
