@@ -9,7 +9,6 @@ namespace ImmersiveToolBelt.Harmony
     public class ToolBelt
     {
         private static ILogger _logger = new Logger();
-        public static DateTime DelayTimerSetAt;
 
         public static void SetLogger(ILogger logger)
         {
@@ -30,29 +29,26 @@ namespace ImmersiveToolBelt.Harmony
         {
             var now = dateTime.Now();
 
-            if (ToolBeltEvent.BackpackOnOpen || ToolBeltEvent.SlotChanged)
+            if (ToolBeltEvent.IsAlive())
             {
-                _logger.Debug($"ToolBeltEvent.BackpackOnOpen: {ToolBeltEvent.BackpackOnOpen}");
-                _logger.Debug($"ToolBeltEvent.SlotChanged: {ToolBeltEvent.SlotChanged}");
                 toolBelt.ForceHide = false;
                 toolBelt.IsVisible = true;
                 _logger.Debug($"Showing tool belt.");
-
-                if (DelayTimerSetAt == DateTime.MinValue) DelayTimerSetAt = now;
             }
 
+            if (ToolBeltEvent.BackpackOnOpen) return;
+
             const int delayInSeconds = 3;
-            var delayTimerInSeconds = (now - DelayTimerSetAt).TotalSeconds;
+            var delayTimerInSeconds = (now - ToolBeltEvent.ChangedAt).TotalSeconds;
             var hideDelayElapsed = delayTimerInSeconds > delayInSeconds;
 
             if (!hideDelayElapsed) return;
 
             _logger.Debug($"{delayTimerInSeconds} seconds passed since Backpack closed, closing windowToolbelt.");
 
-            DelayTimerSetAt = DateTime.MinValue;
-            ToolBeltEvent.SlotChanged = false;
             toolBelt.ForceHide = true;
             toolBelt.IsVisible = false;
+            ToolBeltEvent.Dispose();
         }
     }
 }

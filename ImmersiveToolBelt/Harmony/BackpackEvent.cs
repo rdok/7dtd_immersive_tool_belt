@@ -3,7 +3,7 @@ using HarmonyLib;
 namespace ImmersiveToolBelt.Harmony
 {
     [HarmonyPatch(typeof(XUiC_BackpackWindow), nameof(XUiC_BackpackWindow.OnClose))]
-    public class Backpack
+    public class BackpackEvent
     {
         private static void Prefix(XUiC_BackpackWindow __instance)
         {

@@ -28,7 +28,7 @@ namespace ImmersiveToolBelt.Harmony
 
             Logger.Debug($"[EntityPlayerLocal]: slotChangedEvent");
 
-            ToolBeltEvent.SlotChanged = true;
+            ToolBeltEvent.Trigger();
         }
     }
 }
