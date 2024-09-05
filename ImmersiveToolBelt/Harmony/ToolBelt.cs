@@ -32,25 +32,27 @@ namespace ImmersiveToolBelt.Harmony
 
             if (ToolBeltEvent.BackpackOnOpen || ToolBeltEvent.SlotChanged)
             {
+                _logger.Debug($"ToolBeltEvent.BackpackOnOpen: {ToolBeltEvent.BackpackOnOpen}");
+                _logger.Debug($"ToolBeltEvent.SlotChanged: {ToolBeltEvent.SlotChanged}");
                 toolBelt.ForceHide = false;
                 toolBelt.IsVisible = true;
-                ToolBeltEvent.SlotChanged = false;
-                DelayTimerSetAt = now;
-                return;
-            }
+                _logger.Debug($"Showing tool belt.");
 
-            if (DelayTimerSetAt == DateTime.MinValue) DelayTimerSetAt = now;
+                if (DelayTimerSetAt == DateTime.MinValue) DelayTimerSetAt = now;
+            }
 
             const int delayInSeconds = 3;
             var delayTimerInSeconds = (now - DelayTimerSetAt).TotalSeconds;
             var hideDelayElapsed = delayTimerInSeconds > delayInSeconds;
 
-            if (!hideDelayElapsed || !toolBelt.IsVisible) return;
+            if (!hideDelayElapsed) return;
 
-            _logger.Info($"{delayTimerInSeconds} seconds passed since Backpack closed, closing windowToolbelt.");
+            _logger.Debug($"{delayTimerInSeconds} seconds passed since Backpack closed, closing windowToolbelt.");
+
+            DelayTimerSetAt = DateTime.MinValue;
+            ToolBeltEvent.SlotChanged = false;
             toolBelt.ForceHide = true;
             toolBelt.IsVisible = false;
-            DelayTimerSetAt = DateTime.MinValue;
         }
     }
 }

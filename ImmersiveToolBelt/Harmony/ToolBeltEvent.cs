@@ -4,7 +4,7 @@ namespace ImmersiveToolBelt.Harmony
     {
         private static bool _isBackpackOnOpen;
         private static bool _isBackpackOnClose;
-        public static bool SlotChanged { get; set; }
+        public static bool SlotChanged { get; set; } = true;
 
         public static bool BackpackOnOpen
         {

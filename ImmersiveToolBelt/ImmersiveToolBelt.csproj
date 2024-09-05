@@ -13,9 +13,8 @@
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-        <ModsAbsolutePath>C:\vortex_udf_7_days_to_die</ModsAbsolutePath>
-        <ModName>ImmersiveToolBelt</ModName>
-        <ModVersion>1.3.0</ModVersion>
+        <ModName>ImmersiveToolBelt</ModName> 
+        <ModVersion>1.3.1</ModVersion>
         <ModDescription>Tool belt when you need. Hide when you don't.</ModDescription>
         <ModId>5649</ModId>
     </PropertyGroup>
@@ -24,7 +23,7 @@
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>$(ModsAbsolutePath)\Mods\$(ModName)</OutputPath>
+        <OutputPath>..\..\..\..\vortex_udf_7_days_to_die\Mods\ZZZZ_ImmersiveToolbelt</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
