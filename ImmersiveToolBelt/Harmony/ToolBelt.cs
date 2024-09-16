@@ -24,7 +24,7 @@ namespace ImmersiveToolBelt.Harmony
         public void Update(IXUiView toolBelt, IDateTime dateTime)
         {
             var now = dateTime.Now();
-            
+
             if (ToolBeltEvent.BackpackOnOpen)
             {
                 _logger.Debug($"ToolBeltEvent.BackpackOnOpen: {ToolBeltEvent.BackpackOnOpen}");
@@ -34,7 +34,7 @@ namespace ImmersiveToolBelt.Harmony
                 return;
             }
 
-            if (ToolBeltEvent.SlotChanged || ToolBeltEvent.BackpackOnClose)
+            if (ToolBeltEvent.SlotChanged)
             {
                 _logger.Debug($"ToolBeltEvent.SlotChanged: {ToolBeltEvent.SlotChanged}");
                 _logger.Debug($"ToolBeltEvent.BackpackOnClose: {ToolBeltEvent.BackpackOnClose}");
@@ -54,7 +54,7 @@ namespace ImmersiveToolBelt.Harmony
             _logger.Debug($"{delayTimerInSeconds} seconds passed since Backpack closed, closing windowToolbelt.");
 
             DelayTimerSetAt = DateTime.MinValue;
-            ToolBeltEvent.SlotChanged = false;
+            ToolBeltEvent.SlotChanged = false; 
             toolBelt.ForceHide = true;
             toolBelt.IsVisible = false;
         }

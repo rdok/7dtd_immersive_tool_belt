@@ -15,7 +15,6 @@ public static class ToolBeltFactory
         var loggerMock = new Mock<ILogger>();
         var settingsMock = new Mock<ISettings>();
 
-        var toolBelt = new ToolBelt(loggerMock.Object, settingsMock.Object);
 
         if (parameters == null) return new ToolBeltContainer { XUiViewMock = xuiViewMock };
 
@@ -28,13 +27,15 @@ public static class ToolBeltFactory
         var hideDelayElapsed = parameters.ContainsKey("hideDelayElapsed") && (bool)parameters["hideDelayElapsed"];
         var currentTime = new DateTime(2024, 8, 5, 10, 0, 0);
         var dateTimeSeam = new DateTimeSeam(() => currentTime);
-        var subtractSeconds = hideDelayElapsed ? -4 : -3;
-        toolBelt.DelayTimerSetAt = currentTime.AddSeconds(subtractSeconds);
+        var subtractSeconds = hideDelayElapsed ? -1 : 0;
 
         var toolBeltIsVisible =
             parameters.ContainsKey("toolBeltIsVisible") && (bool)parameters["toolBeltIsVisible"];
         xuiViewMock.Setup(p => p.IsVisible).Returns(toolBeltIsVisible);
 
+        var toolBelt = new ToolBelt(loggerMock.Object, settingsMock.Object);
+        toolBelt.DelayTimerSetAt = currentTime.AddSeconds(subtractSeconds);
+        
         return new ToolBeltContainer
         {
             ToolBelt = toolBelt,
