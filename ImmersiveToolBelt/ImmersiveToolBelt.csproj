@@ -14,7 +14,7 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModName>ImmersiveToolBelt</ModName>
-        <ModVersion>1.4.0</ModVersion>
+        <ModVersion>1.5.0</ModVersion>
         <ModDescription>Tool belt when you need. Hide when you don't.</ModDescription>
         <ModId>5649</ModId>
         <GamePath>..\..\..\..\Steam\steamapps\common\7 Days To Die</GamePath>

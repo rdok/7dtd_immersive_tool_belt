@@ -1,11 +1,11 @@
 ## Changelog
 
-#### v1.4.0 16-Sep-24
+#### v1.5.0 16-Sep-24
 
 - feat: Added customizable delay timer through Gears in the mod settings.
 - feat: Enabled customizable delay timer via ModSettings.xml for cases where Gears are unavailable.
 
-#### v1.3.1 05-Sep-24
+#### v1.4.0 05-Sep-24
 
 - feat: Compatability with [SMX - By Sirillion](https://www.nexusmods.com/7daystodie/mods/22)
 
