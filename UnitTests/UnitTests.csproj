@@ -68,11 +68,11 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Harmony\SlotChangedEventFactory.cs" />
-        <Compile Include="Harmony\ToolBeltFactory.cs" />
-        <Compile Include="Harmony\OpenToolBeltTests.cs" />
-        <Compile Include="Harmony\CloseToolBeltTests.cs" />
-        <Compile Include="Harmony\SlotChangedTests.cs" />
+        <Compile Include="Harmony\SlotChangedEventFactory.cs"/>
+        <Compile Include="Harmony\ToolBeltFactory.cs"/>
+        <Compile Include="Harmony\OpenToolBeltTests.cs"/>
+        <Compile Include="Harmony\CloseToolBeltTests.cs"/>
+        <Compile Include="Harmony\SlotChangedTests.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>

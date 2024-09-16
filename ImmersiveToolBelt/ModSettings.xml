@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModSettings>
+    <Global>
+        <Tab name="General">
+            <Category name="ImmersiveToolBelt" displayKey="immersiveToolBeltDisplayKey">
+                <Selector
+                        name="HideDelayInSeconds"
+                        displayKey="hideDelayInSecondsDisplayKey"
+                        tooltipKey="hideDelayInSecondsTooltipKey"
+                        defaultValue="3"
+                >
+                    <Property type="arrayValues" allowedValues="0,1,2,3"/>
+                </Selector>
+            </Category>
+        </Tab>
+    </Global>
+</ModSettings>
