@@ -11,12 +11,13 @@ public static class ToolBeltFactory
 {
     public static ToolBeltContainer Create(Dictionary<string, object> parameters = null)
     {
-        var toolBeltMock = new Mock<IXUiView>();
+        var xuiViewMock = new Mock<IXUiView>();
         var loggerMock = new Mock<ILogger>();
+        var settingsMock = new Mock<ISettings>();
 
-        ToolBelt.SetLogger(loggerMock.Object);
+        var toolBelt = new ToolBelt(loggerMock.Object, settingsMock.Object);
 
-        if (parameters == null) return new ToolBeltContainer { toolBeltMock = toolBeltMock };
+        if (parameters == null) return new ToolBeltContainer { XUiViewMock = xuiViewMock };
 
         var backpackOnOpen = parameters.ContainsKey("BackpackOnOpen") && (bool)parameters["BackpackOnOpen"];
         ToolBeltEvent.BackpackOnOpen = backpackOnOpen;
@@ -28,22 +29,24 @@ public static class ToolBeltFactory
         var currentTime = new DateTime(2024, 8, 5, 10, 0, 0);
         var dateTimeSeam = new DateTimeSeam(() => currentTime);
         var subtractSeconds = hideDelayElapsed ? -4 : -3;
-        ToolBelt.DelayTimerSetAt = currentTime.AddSeconds(subtractSeconds);
+        toolBelt.DelayTimerSetAt = currentTime.AddSeconds(subtractSeconds);
 
         var toolBeltIsVisible =
             parameters.ContainsKey("toolBeltIsVisible") && (bool)parameters["toolBeltIsVisible"];
-        toolBeltMock.Setup(p => p.IsVisible).Returns(toolBeltIsVisible);
+        xuiViewMock.Setup(p => p.IsVisible).Returns(toolBeltIsVisible);
 
-        return new ToolBeltContainer()
+        return new ToolBeltContainer
         {
-            now = dateTimeSeam,
-            toolBeltMock = toolBeltMock,
+            ToolBelt = toolBelt,
+            DateTime = dateTimeSeam,
+            XUiViewMock = xuiViewMock
         };
     }
 }
 
 public class ToolBeltContainer
 {
-    public Mock<IXUiView> toolBeltMock { get; set; }
-    public IDateTime now { get; set; }
+    public Mock<IXUiView> XUiViewMock { get; set; }
+    public IDateTime DateTime { get; set; }
+    public ToolBelt ToolBelt { get; set; }
 }

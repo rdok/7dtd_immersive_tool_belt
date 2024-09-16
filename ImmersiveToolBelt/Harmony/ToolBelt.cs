@@ -1,47 +1,51 @@
 ﻿using System;
-using HarmonyLib;
 using ImmersiveToolBelt.Harmony.Interfaces;
-using ImmersiveToolBelt.Harmony.Seams;
 
 namespace ImmersiveToolBelt.Harmony
 {
-    [HarmonyPatch(typeof(XUiC_ToolbeltWindow), nameof(XUiC_ToolbeltWindow.Update))]
     public class ToolBelt
     {
-        private static ILogger _logger = new Logger();
-        public static DateTime DelayTimerSetAt;
+        private readonly ILogger _logger;
+        private readonly ISettings _settings;
+        public DateTime DelayTimerSetAt;
 
-        public static void SetLogger(ILogger logger)
+        public ToolBelt()
+        {
+            _logger = Services.Get<ILogger>();
+            _settings = Services.Get<ISettings>();
+        }
+
+        public ToolBelt(ILogger logger, ISettings settings)
         {
             _logger = logger;
+            _settings = settings;
         }
 
-        public static bool Prefix(XUiC_ToolbeltWindow __instance)
-        {
-            var toolBelt = new XUiViewSeam(__instance.ViewComponent);
-            var dateTimeSeam = new DateTimeSeam();
-            Wrapper(toolBelt, dateTimeSeam);
-
-            const bool allowOriginalMethodExecution = true;
-            return allowOriginalMethodExecution;
-        }
-
-        public static void Wrapper(IXUiView toolBelt, IDateTime dateTime)
+        public void Update(IXUiView toolBelt, IDateTime dateTime)
         {
             var now = dateTime.Now();
-
-            if (ToolBeltEvent.BackpackOnOpen || ToolBeltEvent.SlotChanged)
+            
+            if (ToolBeltEvent.BackpackOnOpen)
             {
                 _logger.Debug($"ToolBeltEvent.BackpackOnOpen: {ToolBeltEvent.BackpackOnOpen}");
-                _logger.Debug($"ToolBeltEvent.SlotChanged: {ToolBeltEvent.SlotChanged}");
                 toolBelt.ForceHide = false;
                 toolBelt.IsVisible = true;
-                _logger.Debug($"Showing tool belt.");
+                DelayTimerSetAt = DateTime.MinValue;
+                return;
+            }
+
+            if (ToolBeltEvent.SlotChanged || ToolBeltEvent.BackpackOnClose)
+            {
+                _logger.Debug($"ToolBeltEvent.SlotChanged: {ToolBeltEvent.SlotChanged}");
+                _logger.Debug($"ToolBeltEvent.BackpackOnClose: {ToolBeltEvent.BackpackOnClose}");
+                toolBelt.ForceHide = false;
+                toolBelt.IsVisible = true;
+                _logger.Debug("Showing tool belt.");
 
                 if (DelayTimerSetAt == DateTime.MinValue) DelayTimerSetAt = now;
             }
 
-            const int delayInSeconds = 3;
+            var delayInSeconds = _settings.HideDelayInSecondsSetting;
             var delayTimerInSeconds = (now - DelayTimerSetAt).TotalSeconds;
             var hideDelayElapsed = delayTimerInSeconds > delayInSeconds;
 
