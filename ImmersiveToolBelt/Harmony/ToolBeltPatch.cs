@@ -1,12 +1,11 @@
-﻿using System;
-using HarmonyLib;
+﻿using HarmonyLib;
 using ImmersiveToolBelt.Harmony.Interfaces;
 using ImmersiveToolBelt.Harmony.Seams;
 
 namespace ImmersiveToolBelt.Harmony
 {
     [HarmonyPatch(typeof(XUiC_ToolbeltWindow), nameof(XUiC_ToolbeltWindow.Update))]
-    public class ToolBelt
+    public class ToolBeltPatch
     {
         private static ILogger _logger = new Logger();
 
@@ -17,29 +16,32 @@ namespace ImmersiveToolBelt.Harmony
 
         public static bool Prefix(XUiC_ToolbeltWindow __instance)
         {
-            var toolBelt = new XUiViewSeam(__instance.ViewComponent);
+            var toolBeltEvent = ServiceRegistry.Resolve<IToolBeltEvent>();
+            var viewSeam = ServiceRegistry.Resolve<ViewComponent, IXUiView>(viewComponent);
             var dateTimeSeam = new DateTimeSeam();
-            Wrapper(toolBelt, dateTimeSeam);
+            Wrapper(toolBelt, dateTimeSeam, toolBeltEvent);
 
             const bool allowOriginalMethodExecution = true;
             return allowOriginalMethodExecution;
         }
 
-        public static void Wrapper(IXUiView toolBelt, IDateTime dateTime)
+        public static void Wrapper(
+            IXUiView toolBelt, IDateTime dateTime, IToolBeltEvent toolBeltEvent
+        )
         {
             var now = dateTime.Now();
 
-            if (ToolBeltEvent.IsAlive())
+            if (toolBeltEvent.IsAlive())
             {
                 toolBelt.ForceHide = false;
                 toolBelt.IsVisible = true;
-                _logger.Debug($"Showing tool belt.");
+                _logger.Debug("Showing tool belt.");
             }
 
-            if (ToolBeltEvent.BackpackOnOpen) return;
+            if (toolBeltEvent.BackpackOnOpen) return;
 
             const int delayInSeconds = 3;
-            var delayTimerInSeconds = (now - ToolBeltEvent.ChangedAt).TotalSeconds;
+            var delayTimerInSeconds = (now - toolBeltEvent.ChangedAt).TotalSeconds;
             var hideDelayElapsed = delayTimerInSeconds > delayInSeconds;
 
             if (!hideDelayElapsed) return;
@@ -48,7 +50,7 @@ namespace ImmersiveToolBelt.Harmony
 
             toolBelt.ForceHide = true;
             toolBelt.IsVisible = false;
-            ToolBeltEvent.Dispose();
+            toolBeltEvent.Dispose();
         }
     }
 }

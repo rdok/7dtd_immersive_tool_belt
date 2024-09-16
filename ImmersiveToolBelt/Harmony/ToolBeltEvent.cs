@@ -2,13 +2,29 @@ using System;
 
 namespace ImmersiveToolBelt.Harmony
 {
-    public static class ToolBeltEvent
+    public interface IToolBeltEvent : IDisposable
     {
-        private static bool _isBackpackOnOpen;
-        private static bool _isBackpackOnClose;
-        public static DateTime ChangedAt { get; private set; } = DateTime.Now;
+        bool BackpackOnOpen { get; set; }
+        bool BackpackOnClose { get; set; }
+        DateTime ChangedAt { get; }
 
-        public static bool BackpackOnOpen
+        void Trigger();
+        bool IsAlive();
+    }
+
+    public class ToolBeltEvent : IToolBeltEvent
+    {
+        private bool _isBackpackOnOpen;
+        private bool _isBackpackOnClose;
+        DateTime _changedAt { get; set; } = DateTime.Now;
+
+        public DateTime ChangedAt
+        {
+            get => _changedAt;
+            private set => _changedAt = value;
+        }
+
+        public bool BackpackOnOpen
         {
             get => _isBackpackOnOpen;
             set
@@ -19,7 +35,7 @@ namespace ImmersiveToolBelt.Harmony
             }
         }
 
-        public static bool BackpackOnClose
+        public bool BackpackOnClose
         {
             get => _isBackpackOnClose;
             set
@@ -30,19 +46,19 @@ namespace ImmersiveToolBelt.Harmony
             }
         }
 
-        public static void Trigger()
+        public void Trigger()
         {
-            ToolBeltEvent.ChangedAt = DateTime.Now;
+            ChangedAt = DateTime.Now;
         }
 
-        public static void Dispose()
+        public void Dispose()
         {
             ChangedAt = DateTime.MinValue;
         }
 
-        public static bool IsAlive()
+        public bool IsAlive()
         {
-            return ToolBeltEvent.ChangedAt != DateTime.MinValue;
+            return ChangedAt != DateTime.MinValue;
         }
     }
 }

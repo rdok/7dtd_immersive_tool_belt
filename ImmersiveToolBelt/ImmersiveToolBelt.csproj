@@ -14,7 +14,7 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModName>ImmersiveToolBelt</ModName> 
-        <ModVersion>1.3.1</ModVersion>
+        <ModVersion>1.4.0</ModVersion>
         <ModDescription>Tool belt when you need. Hide when you don't.</ModDescription>
         <ModId>5649</ModId>
     </PropertyGroup>
@@ -39,12 +39,14 @@
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="Harmony\Backpack.cs"/>
+        <Compile Include="Harmony\BackpackEvent.cs" />
         <Compile Include="Harmony\Interfaces\IPlayerAction.cs" />
         <Compile Include="Harmony\Interfaces\IPlayerActionsLocal.cs" />
         <Compile Include="Harmony\Interfaces\IPlayerInput.cs" />
+        <Compile Include="Harmony\ServiceRegistry.cs" />
         <Compile Include="Harmony\Seams\PlayerActionsLocalSeam.cs" />
         <Compile Include="Harmony\Seams\PlayerActionSteam.cs" />
+        <Compile Include="Harmony\Seams\ToolBeltEventSeam.cs" />
         <Compile Include="Harmony\SlotChangedEvent.cs"/>
         <Compile Include="Harmony\ToolBeltEvent.cs"/>
         <Compile Include="Harmony\Interfaces\IDateTime.cs"/>
@@ -65,7 +67,7 @@
         <Compile Include="Harmony\Seams\XUiViewSeam.cs"/>
         <Compile Include="Harmony\Seams\EntityPlayerLocalSeam.cs"/>
         <Compile Include="Harmony\Seams\LocalPlayerUISeam.cs"/>
-        <Compile Include="Harmony\ToolBelt.cs"/>
+        <Compile Include="Harmony\ToolBeltPatch.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
 

@@ -17,14 +17,18 @@ namespace UnitTests.Harmony
             { "InventorySlotRightWasPressed", false },
         };
 
-        public static Mock<IEntityPlayerLocal> Create(Dictionary<string, object> parameters)
+        public static (
+            Mock<IEntityPlayerLocal> entityPlayerLocalMock,
+            Mock<IToolBeltEvent> toolBeltEvent
+            ) Create(Dictionary<string, object> parameters)
         {
             var entityPlayerLocalMock = new Mock<IEntityPlayerLocal>();
             var playerInputMock = new Mock<IPlayerActionsLocal>();
+            var toolBeltEventMock = new Mock<IToolBeltEvent>();
 
             entityPlayerLocalMock.Setup(p => p.playerInput).Returns(playerInputMock.Object);
 
-            if (parameters == null) return entityPlayerLocalMock;
+            if (parameters == null) return (entityPlayerLocalMock, toolBeltEventMock);
 
             var hasPlayerInput =
                 parameters.ContainsKey("HasPlayerInput") &&
@@ -45,7 +49,7 @@ namespace UnitTests.Harmony
                                                (bool)parameters["InventorySlotRightWasPressed"];
             playerInputMock.Setup(p => p.InventorySlotRight.WasPressed).Returns(inventorySlotRightWasPressed);
 
-            return (entityPlayerLocalMock);
+            return (entityPlayerLocalMock, toolBeltEventMock);
         }
     }
 }
