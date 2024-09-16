@@ -1,6 +1,6 @@
 [size=6]7 Days to Die Mod - Immersive Tool Belt[/size]
 
-[url=https://next.nexusmods.com/7daystodie/collections/epfqzi][img]https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://www.nexusmods.com/7daystodie/mods/5649][img]https://img.shields.io/badge/Nexus%20Mod-Immersive%20Tool%20Belt%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://github.com/rdok/7dtd_immersive_tool_belt][img]https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github[/img][/url]
+[url=https://next.nexusmods.com/7daystodie/collections/epfqzi][img]https://img.shields.io/badge/Collection-Minimalist%20-bf4848?style=flat-square&logo=nexusmods[/img][/url] [url=https://www.nexusmods.com/7daystodie/mods/5649][img]https://img.shields.io/badge/Mod-Immersive%20Tool%20Belt%20-bf4848?style=flat-square&logo=nexusmods[/img][/url] [url=https://github.com/rdok/7dtd_immersive_tool_belt][img]https://img.shields.io/badge/Open-Source-2ea44f?style=flat-square&logo=github[/img][/url]
 
 [quote]
 [b]Immersive Tool Belt:[/b] Tool belt when you need. Hide when you don't.  
@@ -8,39 +8,22 @@
 [/quote]
 [url=https://www.nexusmods.com/7daystodie/mods/5649][img]https://github.com/rdok/7dtd_immersive_tool_belt/blob/main/documentation/showcase.gif?raw=true[/img][/url]
 
+[size=5]Installation[/size]
+[list]
+[*] [b]Game Version:[/b] Compatible with version 1.0 of the game.
+[*] [b]Install with Vortex:[/b] Easily install the mod using the [url=https://www.nexusmods.com/about/vortex/]Vortex Mod Manager[/url].
+[*] [b]Optional Customization:[/b]
+[list]
+[*] Customize the mod directly through the in-game Gears settings.
+[*] Alternatively, if Gears cannot be installed, customization is available via the [b]ModSettings.xml[/b] file.
+[/list][/list]
+
 [size=5]Features[/size]
 [list]
-[*] Automatically hides the tool belt three seconds after closing the backpack or switching inventory slots.
-[*] Displays the tool belt after three seconds of inactivity when changing a tool belt slot or opening the backpack.
-[*] Compatible with 
+[*] Automatically hides or displays the tool belt after a customizable delay (default is three seconds) when closing the backpack, switching inventory slots, or when inactive while switching tool belt slots.
+[*] Fully compatible with:
 [list]
-[*] Controllers 
+[*] Controllers
 [*] [url=https://www.nexusmods.com/7daystodie/mods/5131]SteelUI - Black UI Theme And Custom HUD[/url]
-[*] [url=https://www.nexusmods.com/7daystodie/mods/22]SMX - By Sirillion[/url][/list]
-[*] Game Version: 1.0. Install with [url=https://www.nexusmods.com/about/vortex/]Vortex[/url].
-[/list]
-[size=5]Changelog[/size]
-[size=3]v1.3.1 05-Sep-24[/size]
-[list]
-[*] feat: Compatability with [url=https://www.nexusmods.com/7daystodie/mods/22]SMX - By Sirillion[/url][/list]
-[size=3]v1.3.0 12-Aug-24[/size]
-[list]
-[*] feat: Adds support for controllers; [url=https://www.nexusmods.com/7daystodie/mods/5649?tab=posts&jump_to_comment=142783683]as reported by  Mebeingocre[/url][/list]
-[size=3]v1.2.0 06-Aug-24[/size]
-[list]
-[*] The tool belt now appears as soon as the player presses or scrolls through, whereas previously it would only appear after releasing the button or completing the item animation.
-[*] Many thanks to [url=https://next.nexusmods.com/profile/busterbjones]busterbjones[/url]for identifying this issue and suggesting a better approach.[/list]
-[size=3]v1.1.1 06-Aug-24[/size]
-[list]
-[*] Fixes an issue where tool belt was hidden when assigning items having backpacks open.
-[*] Many thanks for the issue report to [url=https://www.nexusmods.com/users/78780238]MrSamuelAdams1992[/url][/list]
-[size=3]v1.1.0 - 06-Aug-24[/size]
-[list]
-[*] Wait for three seconds before hiding the tool belt upon closing backpack.
-[*] Show the tool belt for three seconds when changing equipped item/changed slots.
-[*] Many thanks for the idea & suggestions on this to: [url=https://www.nexusmods.com/7daystodie/users/52409026]MCT477[/url], [url=https://www.nexusmods.com/7daystodie/users/37992605]Khajits[/url], [url=https://www.nexusmods.com/7daystodie/users/98186053]dujinyuan[/url], [url=https://next.nexusmods.com/profile/MrSamuelAdams1992]MrSamuelAdams1992[/url][/list]
-[size=3]v1.0.0 - 04-Aug-24[/size]
-[list]
-[*] Hide tool belt when backpack is closed.
-[*] Enable tool belt when backpack is opened.
-[/list]
+[*] [url=https://www.nexusmods.com/7daystodie/mods/22]SMX - By Sirillion[/url]
+[/list][/list]
