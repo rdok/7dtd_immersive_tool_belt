@@ -12,7 +12,7 @@
 - **Game Version:** Compatible with version 1.0 of the game.
 - **Install with Vortex:** Easily install the mod using the [Vortex Mod Manager](https://www.nexusmods.com/about/vortex/).
 - **Optional Customization:**
-  - Customize the mod directly through the in-game Gears settings.
+  - Customize the mod directly through the in-game [Gears](https://www.nexusmods.com/7daystodie/mods/4017) & [Quartz](https://www.nexusmods.com/7daystodie/mods/2409/) settings.
   - Alternatively, if Gears cannot be installed, customization is available via the `ModSettings.xml` file.
 
    
